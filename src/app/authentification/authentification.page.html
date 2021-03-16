@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <img class="img" src="assets/Maquettes/Logo%20MONEY%20SA%201.png" alt="">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-toolbar>
+    <ion-title class="ion-text-center " color="dark">Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-align-self-center" >
+        <ion-card-subtitle class="text-danger ion-text-center" *ngIf="errors">login ou mot de passe incorrecte</ion-card-subtitle>
+        <form [formGroup]="authForm" #myform="ngForm" (ngSubmit)="onSubmit()">
+  <ion-item lines="inset">
+    <ion-label position="floating">Username</ion-label>
+    <ion-input type="text" formControlName="username" (click)="clearmessageError()" clear-input></ion-input>
+    <small class="text-danger"
+           *ngIf="authForm.get('username').hasError('required') && (myform.submitted || authForm.get('username').touched) ">
+      Le champs est requis.
+    </small>
+    <small class="text-danger"
+           *ngIf="authForm.get('username').hasError('email') && (authForm.get('username').dirty && authForm.get('username').touched) ">
+      Entrer un email valide.
+    </small>
+  </ion-item>
+
+  <ion-item lines="inset" id="password">
+    <ion-label position="floating">Password</ion-label>
+    <ion-row> <ion-input type="password" placeholder="*******" formControlName="password" (click)="clearmessageError()" clear-input></ion-input> <div> <ion-icon name="eye-off"></ion-icon></div></ion-row>
+    <small class="text-danger"
+           *ngIf="authForm.get('password').hasError('required') && (myform.submitted || authForm.get('password').touched) ">
+      Le champs est requis.
+    </small>
+  </ion-item>
+      <a [routerLink]="['/forgot-password']" class="small-text"> Mot de passe oublié?</a>
+      <ion-row>
+        <ion-col class="ion-text-center ion-margin-top" >
+            <ion-button type="submit"  color="secondary" expand="block">Sign In</ion-button>
+          <img *ngIf="loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+
+        </ion-col>
+      </ion-row>
+    </form>
+
+    </ion-col>
+      </ion-row>
+    </ion-grid>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row class="ion-text-center">
+        <ion-col>
+          <div><ion-icon name="home-outline" size="large"></ion-icon></div>
+          <small>home</small>
+        </ion-col>
+        <ion-col>
+          <div> <ion-icon name="wallet-outline" size="large"></ion-icon></div>
+          <small>transactions</small>
+        </ion-col>
+        <ion-col>
+          <div><ion-icon name="cash-outline" size="large"></ion-icon></div>
+          <small>comissions</small>
+        </ion-col>
+        <ion-col>
+          <div> <ion-icon name="calculator-outline" size="large"></ion-icon></div>
+          <small>calculator</small>
+        </ion-col>
+
+        </ion-row>
+      </ion-grid>
+  </ion-toolbar>
+</ion-footer>

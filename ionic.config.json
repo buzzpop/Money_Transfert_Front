@@ -1,5 +1,7 @@
 {
   "name": "Money_Transfert_Front",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

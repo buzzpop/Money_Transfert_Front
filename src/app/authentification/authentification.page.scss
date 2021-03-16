@@ -1,0 +1,41 @@
+
+ion-header{
+  ion-toolbar{
+    ion-title{
+      font-size: 25px;
+      font-family: Chandas, serif;
+    }
+  }
+}
+ion-content {
+  ion-grid{
+    padding-top: 50px;
+    display: flex;
+    justify-content: center;
+  }
+
+  ion-item {
+    margin-bottom: 30px;
+
+    ion-label {
+      color: grey;
+    }
+  }
+  a{
+    color: #00aaf4;
+  }
+
+}
+ion-button{
+  margin-top: 50px;
+}
+.text-danger{
+  color: red;
+}
+#password{
+  ion-icon{
+    cursor: pointer;
+    font-size: 25px;
+  }
+}
+

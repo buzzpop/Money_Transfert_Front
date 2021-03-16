@@ -1,16 +1,38 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import {AuthGuardService} from './services/auth-guard.service';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: 'authentication',
     pathMatch: 'full'
   },
   {
-    path: 'folder/:id',
+    path: 'home',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
-  }
+  },
+  {
+    path: 'authentication',
+    loadChildren: () => import('./authentification/authentification.module').then( m => m.AuthentificationPageModule)
+  },
+  {
+    path: 'depot',
+    loadChildren: () => import('./depot/depot.module').then( m => m.DepotPageModule)
+  },
+  {
+    path: 'calculator-frais',
+    loadChildren: () => import('./calculator-frais/calculator-frais.module').then( m => m.CalculatorFraisPageModule)
+  },
+  {
+    path: 'retrait',
+    loadChildren: () => import('./retrait/retrait.module').then( m => m.RetraitPageModule)
+  },
+  {
+    path: 'transaction',
+    loadChildren: () => import('./transaction/transaction.module').then( m => m.TransactionPageModule)
+  },
+
 ];
 
 @NgModule({

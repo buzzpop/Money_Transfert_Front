@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Router} from '@angular/router';
+import {AuthenticationService} from '../services/authentication.service';
+import {AgenceService} from '../services/agence.service';
 
 @Component({
   selector: 'app-folder',
@@ -8,11 +10,25 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class FolderPage implements OnInit {
   public folder: string;
+  account:any
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor(private authService: AuthenticationService,
+              private router: Router, private agenceService: AgenceService) { }
 
   ngOnInit() {
-    this.folder = this.activatedRoute.snapshot.paramMap.get('id');
+
+  this.agenceService.show_hidePassword();
+  this.authService.getTokenOnStorage('decodeToken').then((token)=>{
+    console.log(JSON.parse(token).id);
+    this.agenceService.getuserSigned(JSON.parse(token).id).subscribe(res=>{
+     this.account=res;
+      console.log(this.account);
+    })
+  });
   }
 
+  logOut() {
+    this.authService.logOut()
+    this.router.navigate(['/authentication'])
+  }
 }

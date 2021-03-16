@@ -10,6 +10,17 @@ ion-menu-button {
   top: 50%;
   transform: translateY(-50%);
 }
+ion-header{
+  background-color:  #d0d0d0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  ion-grid ion-row.header{
+    text-align: -webkit-center;
+  }
+  .header ion-menu-button{
+    color: black;
+  }
+}
 
 #container strong {
   font-size: 20px;
@@ -25,4 +36,35 @@ ion-menu-button {
 
 #container a {
   text-decoration: none;
+}
+.eye{
+  padding-top: 14px;
+  font-size: 25px;
+  a{
+    color: #54c0d0;
+  }
+}
+.amount{
+  color: #54c0d0;
+  font-size: 25px;
+  font-family: "Bitstream Charter", serif;
+  font-weight: bold;
+}
+ion-content {
+  .content {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  .icon_name{
+    display: contents;
+    font-size: 20px;
+  }
+  ion-grid{
+    ion-row{
+      cursor: pointer;
+    }
+  }
+  span{
+    font-size: 15px;
+  }
 }

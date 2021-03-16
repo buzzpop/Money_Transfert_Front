@@ -1,0 +1,149 @@
+<ion-header [translucent]="true">
+  <ion-grid>
+    <ion-row class="ion-padding">
+      <ion-col>
+        <a [routerLink]="['/home']"><ion-icon class="home" name="home" size="large"></ion-icon></a>
+      </ion-col>
+      <ion-col>
+        <img src="assets/Maquettes/Logo%20MONEY%20SA%201.png" alt="">
+      </ion-col>
+      <ion-col>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-margin-bottom">
+        <ion-col class="icon_name">
+          <span>Dépôt</span>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-segment color="primary" [(ngModel)]="segmentModel" >
+    <ion-segment-button value="emetteur">
+      <ion-label>Emetteur</ion-label>
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button [disabled]="!(depotForm.get('amount').valid && depotForm.get('clientD').valid)" value="recepteur">
+      <ion-label>Récepteur</ion-label>
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="depotForm" #myform="ngForm">
+  <div *ngIf="segmentModel=='emetteur'">
+    <div [formGroupName]="'clientD'" >
+    <ion-item lines="inset">
+      <ion-label position="floating">N° CNI</ion-label>
+      <ion-input type="text" placeholder="1 291 1998 23 221" formControlName="cni"></ion-input>
+      <small class="text-danger"
+             *ngIf="depotForm.get('clientD').get('cni').hasError('required') && (myform.submitted || depotForm.get('clientD').get('cni').touched) ">
+        Le cni est requis.
+      </small>
+      <small class="text-danger"
+             *ngIf="depotForm.get('clientD').get('cni').hasError('pattern') && (myform.submitted || depotForm.get('clientD').get('cni').touched) ">
+        Le cni se compose de 13 chiffres.
+      </small>
+    </ion-item>
+    <ion-item lines="inset">
+      <ion-label position="floating">Nom</ion-label>
+      <ion-input type="text" placeholder="MBODJ" formControlName="lastname"></ion-input>
+      <small class="text-danger"
+             *ngIf="depotForm.get('clientD').get('lastname').hasError('required') && (myform.submitted || depotForm.get('clientD').get('lastname').touched) ">
+        Le nom est requis.
+      </small>
+    </ion-item>
+    <ion-item lines="inset">
+      <ion-label position="floating">Prénom</ion-label>
+      <ion-input type="text" placeholder="Rassoul" formControlName="firstname"></ion-input>
+      <small class="text-danger"
+             *ngIf="depotForm.get('clientD').get('firstname').hasError('required') && (myform.submitted || depotForm.get('clientD').get('firstname').touched) ">
+        Le prénom est requis.
+      </small>
+    </ion-item>
+    <ion-item lines="inset">
+      <ion-label position="floating">Téléphone</ion-label>
+      <ion-input type="number" placeholder="77 091 21 22" formControlName="phone"></ion-input>
+      <small class="text-danger"
+             *ngIf="depotForm.get('clientD').get('phone').hasError('required') && (myform.submitted || depotForm.get('clientD').get('phone').touched) ">
+        Le téléphone est requis.
+      </small>
+      <small class="text-danger"
+             *ngIf="depotForm.get('clientD').get('phone').hasError('pattern') && (myform.submitted || depotForm.get('clientD').get('phone').touched) ">
+        Entrer un numéro valide.
+      </small>
+    </ion-item>
+   </div>
+    <ion-item lines="inset">
+      <ion-label position="floating">Montant</ion-label>
+      <ion-input type="number" placeholder="350 000" formControlName="amount"></ion-input>
+      <small class="text-danger"
+             *ngIf="depotForm.get('amount').hasError('required') && (myform.submitted || depotForm.get('amount').touched) ">
+        Entrer le montant à envoyer.
+      </small>
+      <small class="text-danger"
+             *ngIf="depotForm.get('amount').hasError('min')  && (myform.submitted || depotForm.get('amount').touched) ">
+        Entrer un montant positif.
+      </small>
+      <small class="text-danger"
+             *ngIf="depotForm.get('amount').hasError('max')  && (myform.submitted ||  depotForm.get('amount').touched) ">
+      Vous ne pouvez pas envoyer plus de 5.000.000 fcfa.
+      </small>
+    </ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item lines="inset">
+            <ion-label position="floating">Total</ion-label>
+            <ion-input placeholder="{{total}}" readonly=""></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item class="ion-float-right" lines="inset">
+            <ion-label position="floating">Frais</ion-label>
+            <ion-input class="frais" placeholder="{{taxe}}" readonly=""></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <section class="ion-margin-top">
+      <ion-button [disabled]="!(depotForm.get('amount').valid && depotForm.get('clientD').valid)" type="button" (click)="segmentValue()" color="secondary" expand="block">Suivant</ion-button>
+    </section>
+  </div>
+  <div *ngIf="segmentModel=='recepteur'">
+    <div [formGroupName]="'clientR'" >
+    <ion-item lines="inset">
+      <ion-label position="floating">Nom</ion-label>
+      <ion-input type="text" placeholder="MBODJ" formControlName="lastname"></ion-input>
+      <small class="text-danger"
+             *ngIf="depotForm.get('clientR').get('lastname').hasError('required') && (myform.submitted || depotForm.get('clientR').get('lastname').touched) ">
+        Le nom est requis.
+      </small>
+    </ion-item>
+    <ion-item lines="inset">
+      <ion-label position="floating">Prénom</ion-label>
+      <ion-input type="text" placeholder="Rassoul" formControlName="firstname"></ion-input>
+      <small class="text-danger"
+             *ngIf="depotForm.get('clientR').get('firstname').hasError('required') && (myform.submitted || depotForm.get('clientR').get('firstname').touched) ">
+        Le prénom est requis.
+      </small>
+    </ion-item>
+    <ion-item lines="inset">
+      <ion-label position="floating">Téléphone</ion-label>
+      <ion-input type="number" placeholder="77 091 21 22" formControlName="phone"></ion-input>
+      <small class="text-danger"
+             *ngIf="depotForm.get('clientR').get('phone').hasError('required') && (myform.submitted || depotForm.get('clientR').get('phone').touched) ">
+        Le téléphone est requis.
+      </small>
+      <small class="text-danger"
+             *ngIf="depotForm.get('clientR').get('phone').hasError('pattern') && (myform.submitted || depotForm.get('clientR').get('phone').touched) ">
+        Entrer un numéro valide.
+      </small>
+    </ion-item>
+    </div>
+    <section class="ion-margin-top">
+      <ion-button  [disabled]="depotForm.invalid" type="submit"  (click)="showAlert()" color="secondary" expand="block">Envoyer</ion-button>
+    </section>
+  </div>
+  </form>
+</ion-content>

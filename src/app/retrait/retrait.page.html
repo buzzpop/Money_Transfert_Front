@@ -1,0 +1,103 @@
+<ion-header [translucent]="true">
+  <ion-grid>
+    <ion-row class="ion-padding">
+      <ion-col>
+        <a  [routerLink]="['/home']"><ion-icon class="home" name="home" size="large"></ion-icon></a>
+      </ion-col>
+      <ion-col>
+        <img src="assets/Maquettes/Logo%20MONEY%20SA%201.png" alt="">
+      </ion-col>
+      <ion-col>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-margin-bottom">
+      <ion-item-divider>
+        <ion-col class="icon_name">
+          <ion-icon size="large" class="ion-margin-horizontal" name="return-up-forward-outline"></ion-icon>
+          <span>Retrait</span>
+        </ion-col>
+      </ion-item-divider>
+    </ion-row>
+  </ion-grid>
+  <ion-segment color="primary" [(ngModel)]="segmentModel">
+    <ion-segment-button value="beneficiaire">
+      <ion-label>Bénéficiaire</ion-label>
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="emetteur">
+      <ion-label>Emetteur</ion-label>
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+<ion-content class="ion-padding">
+  <form [formGroup]="retraitForm" #myform="ngForm">
+  <ion-item lines="inset" class="ion-margin-bottom">
+    <ion-label position="floating">Code</ion-label>
+    <ion-input type="text" placeholder="234-219-203" formControlName="transactionCode"></ion-input>
+    <small class="text-danger"
+           *ngIf="retraitForm.get('transactionCode').hasError('required') && (myform.submitted || retraitForm.get('transactionCode').touched) ">
+      entrer le code de transaction.
+    </small>
+    <small class="text-danger"
+           *ngIf="retraitForm.get('transactionCode').hasError('pattern') && (myform.submitted || retraitForm.get('transactionCode').touched) ">
+      respecter le format de code ex: <span>234-219-203</span>.
+    </small>
+  </ion-item>
+
+  <div *ngIf="segmentModel=='beneficiaire'">
+  <ion-item *ngIf="clients" lines="inset" class="ion-margin-bottom ion-margin-top">
+    <ion-label position="floating">N° CNI</ion-label>
+    <ion-input type="text" formControlName="cni"></ion-input>
+    <small class="text-danger"
+           *ngIf="retraitForm.get('cni').hasError('required') && (myform.submitted || retraitForm.get('cni').touched) ">
+      entrer le cni du client retrait.
+    </small>
+    <small class="text-danger"
+           *ngIf="retraitForm.get('cni').hasError('pattern') && (myform.submitted || retraitForm.get('cni').touched) ">
+      Le cni se compose de 13 chiffres.
+    </small>
+  </ion-item>
+  <ion-card>
+      <ion-card-subtitle>NOM & PRENOM</ion-card-subtitle>
+      <ion-card-title *ngIf="clients">{{clients.clientRetrait.firstname}}</ion-card-title>
+  </ion-card>
+  <ion-card>
+    <ion-card-subtitle>MONTANT A RECEVOIR</ion-card-subtitle>
+    <ion-card-title *ngIf="clients">{{clients.amount}} Franc CFA</ion-card-title>
+  </ion-card>
+  <ion-card>
+    <ion-card-subtitle>TELEPHONE</ion-card-subtitle>
+    <ion-card-title *ngIf="clients">{{clients.clientRetrait.phone}}</ion-card-title>
+  </ion-card>
+  <ion-card>
+    <ion-card-subtitle>DATE D'ENVOI</ion-card-subtitle>
+    <ion-card-title *ngIf="clients">{{clients.depositDate| date:'shortDate' }} à {{clients.depositDate| date:'mediumTime' }}</ion-card-title>
+  </ion-card>
+  </div>
+  <div *ngIf="segmentModel=='emetteur'">
+    <ion-card>
+      <ion-card-subtitle>N° CNI</ion-card-subtitle>
+      <ion-card-title *ngIf="clients">{{clients.clientDepot.cni}}</ion-card-title>
+    </ion-card>
+    <ion-card>
+      <ion-card-subtitle>NOM & PRENOM</ion-card-subtitle>
+      <ion-card-title *ngIf="clients">{{clients.clientDepot.firstname}} {{clients.clientDepot.laname}}</ion-card-title>
+    </ion-card>
+    <ion-card>
+      <ion-card-subtitle>MONTANT ENVOYE</ion-card-subtitle>
+      <ion-card-title *ngIf="clients">{{clients.amount}} Franc CFA</ion-card-title>
+    </ion-card>
+    <ion-card>
+      <ion-card-subtitle>TELEPHONE</ion-card-subtitle>
+      <ion-card-title *ngIf="clients">{{clients.clientDepot.phone}}</ion-card-title>
+    </ion-card>
+    <ion-card>
+      <ion-card-subtitle>DATE D'ENVOI</ion-card-subtitle>
+      <ion-card-title *ngIf="clients">{{clients.depositDate| date:'shortDate' }} à {{clients.depositDate| date:'mediumTime' }}</ion-card-title>
+    </ion-card>
+  </div>
+  <ion-button [disabled]="retraitForm.invalid" (click)="showAlert()" color="secondary" expand="block">RETIRER</ion-button>
+  </form>
+</ion-content>

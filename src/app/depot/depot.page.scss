@@ -1,0 +1,18 @@
+ion-header{
+  background-color: #d0d0d0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  ion-row{
+    ion-col{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  .home{
+    color: #54c0d0;
+  }
+}
+.text-danger{
+  color: red;
+}
