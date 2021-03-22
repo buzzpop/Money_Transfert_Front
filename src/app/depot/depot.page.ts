@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import { AlertController, ToastController} from '@ionic/angular';
 import {TransactionsService} from '../services/transactions.service';
 import {Router} from '@angular/router';
+import {FunctionsService} from '../services/functions.service';
 
 @Component({
   selector: 'app-depot',
@@ -22,7 +23,8 @@ export class DepotPage implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private  http: HttpClient,
               private alertCtrl: AlertController, private transanction: TransactionsService,
-              private toastController: ToastController, private router: Router) {
+              private toastController: ToastController, private router: Router,
+              private functionService: FunctionsService) {
   }
 
   ngOnInit() {
@@ -80,19 +82,23 @@ export class DepotPage implements OnInit {
         {
           text: 'Envoyer',
           handler: () => {
-            this.transanction.depot(this.depotForm.value).subscribe(response => {
-                this.depot = response;
-                this.messageAlert('success', 'dépot effectué avec succés');
-              },
-              error => {
-                console.log(error);
-               if (error.error=="insufficient amount"){
-                 this.messageAlert('warning', 'le solde du compte est inferieur au montant demandé');
-               }if (error.error=="low account"){
-                  this.messageAlert('warning', ' le depot ne peut pas etre effectué car le solde du compte est inferieur à 5000');
-                }
+            this.functionService.handleButtonClick().then(res=>{
+              res.onDidDismiss().then(()=>{
+                this.transanction.depot(this.depotForm.value).subscribe(response => {
+                    this.depot = response;
+                    this.messageAlert('success', 'dépot effectué avec succés');
+                  },
+                  error => {
+                    console.log(error);
+                    if (error.error=="insufficient amount"){
+                      this.messageAlert('warning', 'le solde du compte est inferieur au montant demandé');
+                    }if (error.error=="low account"){
+                      this.messageAlert('warning', ' le depot ne peut pas etre effectué car le solde du compte est inferieur à 5000');
+                    }
 
+                  })
               })
+            })
           }
         }
       ]
@@ -150,13 +156,14 @@ export class DepotPage implements OnInit {
   async messageAlert(color: string, message: string) {
     const toast = await this.toastController.create({
       color: color,
-      duration: 3000,
+      duration: 1000,
       message: message,
       position: 'top'
     });
     await toast.present();
     if (color=="danger"){
       await toast.onDidDismiss().then(() =>{
+        this.depotForm.reset()
         this.router.navigate(['/home'])
       })
     }if (color=="success") {

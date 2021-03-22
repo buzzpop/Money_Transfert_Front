@@ -59,43 +59,43 @@
       Le cni se compose de 13 chiffres.
     </small>
   </ion-item>
-  <ion-card>
+  <ion-card *ngIf="clients">
       <ion-card-subtitle>NOM & PRENOM</ion-card-subtitle>
-      <ion-card-title *ngIf="clients">{{clients.clientRetrait.firstname}}</ion-card-title>
+      <ion-card-title>{{clients.clientRetrait.firstname}}</ion-card-title>
   </ion-card>
-  <ion-card>
+  <ion-card  *ngIf="clients">
     <ion-card-subtitle>MONTANT A RECEVOIR</ion-card-subtitle>
-    <ion-card-title *ngIf="clients">{{clients.amount}} Franc CFA</ion-card-title>
+    <ion-card-title>{{clients.amount}} Franc CFA</ion-card-title>
   </ion-card>
-  <ion-card>
+  <ion-card *ngIf="clients">
     <ion-card-subtitle>TELEPHONE</ion-card-subtitle>
-    <ion-card-title *ngIf="clients">{{clients.clientRetrait.phone}}</ion-card-title>
+    <ion-card-title>{{clients.clientRetrait.phone}}</ion-card-title>
   </ion-card>
-  <ion-card>
+  <ion-card *ngIf="clients">
     <ion-card-subtitle>DATE D'ENVOI</ion-card-subtitle>
-    <ion-card-title *ngIf="clients">{{clients.depositDate| date:'shortDate' }} à {{clients.depositDate| date:'mediumTime' }}</ion-card-title>
+    <ion-card-title >{{clients.depositDate| date:'shortDate' }} à {{clients.depositDate| date:'mediumTime' }}</ion-card-title>
   </ion-card>
   </div>
   <div *ngIf="segmentModel=='emetteur'">
-    <ion-card>
+    <ion-card  *ngIf="clients">
       <ion-card-subtitle>N° CNI</ion-card-subtitle>
-      <ion-card-title *ngIf="clients">{{clients.clientDepot.cni}}</ion-card-title>
+      <ion-card-title>{{clients.clientDepot.cni}}</ion-card-title>
     </ion-card>
-    <ion-card>
+    <ion-card *ngIf="clients">
       <ion-card-subtitle>NOM & PRENOM</ion-card-subtitle>
-      <ion-card-title *ngIf="clients">{{clients.clientDepot.firstname}} {{clients.clientDepot.laname}}</ion-card-title>
+      <ion-card-title >{{clients.clientDepot.firstname}} {{clients.clientDepot.laname}}</ion-card-title>
     </ion-card>
-    <ion-card>
+    <ion-card *ngIf="clients">
       <ion-card-subtitle>MONTANT ENVOYE</ion-card-subtitle>
-      <ion-card-title *ngIf="clients">{{clients.amount}} Franc CFA</ion-card-title>
+      <ion-card-title >{{clients.amount}} Franc CFA</ion-card-title>
     </ion-card>
-    <ion-card>
+    <ion-card *ngIf="clients">
       <ion-card-subtitle>TELEPHONE</ion-card-subtitle>
-      <ion-card-title *ngIf="clients">{{clients.clientDepot.phone}}</ion-card-title>
+      <ion-card-title>{{clients.clientDepot.phone}}</ion-card-title>
     </ion-card>
-    <ion-card>
+    <ion-card *ngIf="clients">
       <ion-card-subtitle>DATE D'ENVOI</ion-card-subtitle>
-      <ion-card-title *ngIf="clients">{{clients.depositDate| date:'shortDate' }} à {{clients.depositDate| date:'mediumTime' }}</ion-card-title>
+      <ion-card-title>{{clients.depositDate| date:'shortDate' }} à {{clients.depositDate| date:'mediumTime' }}</ion-card-title>
     </ion-card>
   </div>
   <ion-button [disabled]="retraitForm.invalid" (click)="showAlert()" color="secondary" expand="block">RETIRER</ion-button>

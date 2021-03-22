@@ -3,8 +3,25 @@
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
         <ion-list id="inbox-list">
-          <ion-list-header>Inbox</ion-list-header>
-          <ion-note>hi@ionicframework.com</ion-note>
+          <ion-list-header *ngIf="user"  class="ion-margin-bottom agence">Agence:{{user.agency.agencyName}} </ion-list-header>
+          <ion-note class="username" *ngIf="user">{{user.username}} </ion-note>
+          <ion-grid>
+            <ion-row class="ion-justify-content-center ion-margin-bottom">
+              <ion-badge>{{user.firstname+' '+user.lastname}}</ion-badge>
+            </ion-row>
+            <ion-row class="ion-justify-content-center ion-margin-bottom">
+              <ion-avatar *ngIf="user" class="ion-margin-start">
+                <img src="{{'data:image/jpg;base64,'+user.avatar}}">
+              </ion-avatar>
+            </ion-row>
+            <ion-row *ngIf="user">
+              <ion-fab horizontal="center">
+                <ion-fab-button (click)="takePicture()">
+                  <ion-icon name="camera"></ion-icon>
+                </ion-fab-button>
+              </ion-fab>
+            </ion-row>
+          </ion-grid>
 
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
@@ -12,16 +29,14 @@
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
-        </ion-list>
-
-        <ion-list id="labels-list">
-          <ion-list-header>Labels</ion-list-header>
-
-          <ion-item *ngFor="let label of labels" lines="none">
-            <ion-icon slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
-            <ion-label>{{ label }}</ion-label>
+          <ion-menu-toggle auto-hide="false">
+          <ion-item (click)="logOut()" class="logOut" routerDirection="root" lines="none" detail="false" routerLinkActive="selected">
+            <ion-icon slot="start" name="log-out"></ion-icon>
+            <ion-label>Déconnexion</ion-label>
           </ion-item>
+          </ion-menu-toggle>
         </ion-list>
+
       </ion-content>
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>

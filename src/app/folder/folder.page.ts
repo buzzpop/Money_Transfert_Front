@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../services/authentication.service';
 import {AgenceService} from '../services/agence.service';
+import {TransactionsService} from '../services/transactions.service';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-folder',
@@ -11,20 +13,41 @@ import {AgenceService} from '../services/agence.service';
 export class FolderPage implements OnInit {
   public folder: string;
   account:any
+  accountId: number
+  user:any
 
   constructor(private authService: AuthenticationService,
-              private router: Router, private agenceService: AgenceService) { }
+              private router: Router, private agenceService: AgenceService,
+              private transactionS: TransactionsService) { }
 
   ngOnInit() {
+    this.authService.getTokenOnStorage('decodeToken').then( (token)=>{
+      this.accountId = JSON.parse(token).id;
+      this.getSolde(this.accountId)
 
+      this.authService.connectedUser(JSON.parse(token).idUser).subscribe(response=>{
+        if (response){
+          this.authService.user.next(response)
+          this.user=response
+        }
+
+      })
+    });
+
+
+  this.transactionS.__refreshSolde.subscribe(()=>{
+
+      this.getSolde(this.accountId)
+
+    }
+  )
   this.agenceService.show_hidePassword();
-  this.authService.getTokenOnStorage('decodeToken').then((token)=>{
-    console.log(JSON.parse(token).id);
-    this.agenceService.getuserSigned(JSON.parse(token).id).subscribe(res=>{
-     this.account=res;
-      console.log(this.account);
+
+  }
+  private getSolde(id:number){
+    this.agenceService.getSolde(id).subscribe(res=>{
+      this.account=res;
     })
-  });
   }
 
   logOut() {

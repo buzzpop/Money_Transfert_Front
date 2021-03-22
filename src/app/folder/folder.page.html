@@ -8,8 +8,8 @@
         <img src="assets/Maquettes/Logo%20MONEY%20SA%201.png" alt="">
       </ion-col>
       <ion-col>
-        <ion-avatar>
-          <img src="assets/Maquettes/admin.jpg" alt="avatar">
+        <ion-avatar *ngIf="user">
+          <img src="{{'data:image/jpg;base64,'+user.avatar}}" alt="avatar">
         </ion-avatar>
       </ion-col>
     </ion-row>
@@ -78,18 +78,18 @@
         </ion-col>
       </ion-item>
     </ion-row>
-    <ion-row>
+    <ion-row [routerLink]="['/commission']">
       <ion-item class="content">
         <ion-col class="icon_name">
           <ion-icon size="large" class="ion-margin-horizontal" name="cash-outline"></ion-icon>
-          <span>Mes comissions</span>
+          <span>Les comissions</span>
         </ion-col>
         <ion-col>
           <ion-icon size="large" class="ion-float-end" name="caret-forward-circle-outline"></ion-icon>
         </ion-col>
       </ion-item>
     </ion-row>
-    <ion-row>
+    <ion-row [routerLink]="['/calculateur']">
       <ion-item class="content">
         <ion-col class="icon_name">
           <ion-icon size="large" class="ion-margin-horizontal" name="calculator-outline"></ion-icon>
@@ -118,7 +118,7 @@
     <ion-grid>
       <ion-row class="ion-text-center">
         <ion-col>
-          <div><ion-icon color="secondary" name="home-outline" size="large"></ion-icon></div>
+          <div><ion-icon routerLink="/home" routerLinkActive='active-item'  name="home-outline" size="large"></ion-icon></div>
           <small>home</small>
         </ion-col>
         <ion-col>

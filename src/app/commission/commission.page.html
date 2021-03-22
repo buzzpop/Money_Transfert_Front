@@ -12,8 +12,8 @@
     </ion-row>
     <ion-row class="ion-margin-bottom">
       <ion-col class="icon_name">
-        <ion-icon name="wallet-outline" size="large"></ion-icon>
-        <span class="ion-margin-start">Mes Transactions</span>
+        <ion-icon name="cash-outline" size="large"></ion-icon>
+        <span class="ion-margin-start">Mes Commissions</span>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -23,7 +23,7 @@
 
   <ion-row>
     <ion-col>
-      <ion-select #val  value="depot" (ionChange)="typeDepot(val)" interface="popover" >
+      <ion-select #val value="depot" (ionChange)="typeDepot(val)" interface="popover" >
         <ion-select-option value="depot">depot</ion-select-option>
         <ion-select-option value="retrait">retrait</ion-select-option>
       </ion-select>
@@ -39,38 +39,37 @@
       </ion-col>
 
       <ion-col>
-        <ion-text>Type</ion-text>
+        <ion-text>Montant</ion-text>
       </ion-col>
 
       <ion-col>
-        <ion-text>Montant</ion-text>
+        <ion-text>Frais</ion-text>
       </ion-col>
     </ion-row>
 
-    <ion-row *ngFor="let c of transactions">
+    <ion-row *ngFor="let c of commissions">
       <ion-col>
         <ion-text *ngIf="type.value=='depot'; else date">
-          {{c.depositDate| date:'dd.MM.y'}}
+         {{c.depositDate| date:'dd.MM.y'}}
         </ion-text>
         <ng-template #date><ion-text>{{c.withdrawalDate| date:'dd.MM.y'}}</ion-text></ng-template>
       </ion-col>
 
       <ion-col>
-        <ion-text *ngIf="type.value=='depot'; else typ">
-         depot
+        <ion-text>
+        {{c.amount+ ' CFA'}}
         </ion-text>
-        <ng-template #typ><ion-text>retrait</ion-text></ng-template>
-
       </ion-col>
 
       <ion-col>
-        <ion-text >
-          {{c.amount+ ' CFA'}}
+        <ion-text *ngIf="type.value=='depot'; else def">
+        {{c.shippingTaxe+ ' CFA'}}
         </ion-text>
+        <ng-template #def><ion-text>{{c.withdrawalTaxe+ ' CFA'}}</ion-text></ng-template>
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-item lines="none">
-    <ion-badge class="ion-padding" slot="end">{{type.value=='depot'? ' Total Dépot: '+ total+ ' Franc CFA': ' Total Retrait: '+ total+ ' Franc CFA'}}</ion-badge>
-  </ion-item>
+<ion-item lines="none">
+  <ion-badge class="ion-padding" slot="end">{{type.value=='depot'? ' Total frais Dépot: '+ total+ ' Franc CFA': ' Total Frais Retrait: '+ total+ ' Franc CFA'}}</ion-badge>
+</ion-item>
 </ion-content>

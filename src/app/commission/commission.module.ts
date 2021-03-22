@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CalculatorFraisPageRoutingModule } from './calculator-frais-routing.module';
+import { CommissionPageRoutingModule } from './commission-routing.module';
 
-import { CalculatorFraisPage } from './calculator-frais.page';
+import { CommissionPage } from './commission.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CalculatorFraisPageRoutingModule
+    CommissionPageRoutingModule
   ],
-  declarations: [CalculatorFraisPage]
+  declarations: [CommissionPage]
 })
-export class CalculatorFraisPageModule {}
+export class CommissionPageModule {}

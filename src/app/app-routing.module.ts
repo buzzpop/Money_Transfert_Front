@@ -20,10 +20,7 @@ const routes: Routes = [
     path: 'depot',
     loadChildren: () => import('./depot/depot.module').then( m => m.DepotPageModule)
   },
-  {
-    path: 'calculator-frais',
-    loadChildren: () => import('./calculator-frais/calculator-frais.module').then( m => m.CalculatorFraisPageModule)
-  },
+
   {
     path: 'retrait',
     loadChildren: () => import('./retrait/retrait.module').then( m => m.RetraitPageModule)
@@ -31,6 +28,14 @@ const routes: Routes = [
   {
     path: 'transaction',
     loadChildren: () => import('./transaction/transaction.module').then( m => m.TransactionPageModule)
+  },
+  {
+    path: 'commission',
+    loadChildren: () => import('./commission/commission.module').then( m => m.CommissionPageModule)
+  },
+  {
+    path: 'calculateur',
+    loadChildren: () => import('./calculateur/calculateur.module').then( m => m.CalculateurPageModule)
   },
 
 ];

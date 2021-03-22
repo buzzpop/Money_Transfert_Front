@@ -68,3 +68,6 @@ ion-content {
     font-size: 15px;
   }
 }
+.active-item {
+  --color: var(--ion-color-danger);
+}

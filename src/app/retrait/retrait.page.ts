@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {AlertController, ToastController} from '@ionic/angular';
 import {TransactionsService} from '../services/transactions.service';
 import {Router} from '@angular/router';
-import {log} from 'util';
+import {FunctionsService} from '../services/functions.service';
 
 @Component({
   selector: 'app-retrait',
@@ -19,7 +19,8 @@ export class RetraitPage implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private  http: HttpClient,
               private alertCtrl: AlertController, private transanction: TransactionsService,
-              private toastController: ToastController, private router: Router) { }
+              private toastController: ToastController, private router: Router,
+              private functionService: FunctionsService) { }
 
   ngOnInit() {
     this.retraitForm = this.formBuilder.group({
@@ -30,11 +31,15 @@ export class RetraitPage implements OnInit {
 
       this.retraitForm.get("transactionCode").valueChanges.subscribe((code: string) => {
         if ( this.retraitForm.get("transactionCode").valid){
-          this.http.get(`http://localhost:8000/api/transaction/${code}/retrait/clients`).subscribe((res: any) => {
-            this.clients=res;
-          },error =>{
-            if (error.status == 403)
-            this.errorMessage('ERREUR','le code de transaction est invalide')})
+          this.functionService.handleButtonClick().then(res=> {
+            res.onDidDismiss().then(() => {
+              this.http.get(`http://localhost:8000/api/transaction/${code}/retrait/clients`).subscribe((res: any) => {
+                this.clients=res;
+              },error =>{
+                if (error.status == 403)
+                  this.errorMessage('ERREUR','le code de transaction est invalide')})
+            })
+          })
         }else {
           this.clients=null;
         }
@@ -76,19 +81,25 @@ export class RetraitPage implements OnInit {
         {
           text: 'Retirer',
           handler: () => {
-            this.transanction.retrait(this.retraitForm.value).subscribe(response => {
-                this.retrait = response;
-               this.messageAlert('success', 'retrait effectué avec succés');
-              },
-              error => {
-              if (error.status== 403){
-                this.errorMessage('Erreur', `le dépot d'un montant de ${this.clients.amount} Franc CFA envoyé par ${this.clients.clientDepot.firstname}
+            this.functionService.handleButtonClick().then(res=>{
+              res.onDidDismiss().then(()=>{
+                this.transanction.retrait(this.retraitForm.value).subscribe(response => {
+                    this.retrait = response;
+                    this.messageAlert('success', 'retrait effectué avec succés');
+                  },
+                  error => {
+                    if (error.error !='impossible'){
+                      this.errorMessage('Erreur', `le dépot d'un montant de ${this.clients.amount} Franc CFA envoyé par ${this.clients.clientDepot.firstname}
                  ${this.clients.clientDepot.lastname} a été déja retiré <br><br>
                  DATE DE RETRAIT: ${error.error}`);
-                this.router.navigate(['/home'])
-              }
-
+                      this.retraitForm.reset()
+                    }else {
+                      this.errorMessage('Erreur', `le montant du compte est inferieur au montant demandé`);
+                      this.retraitForm.reset()
+                    }
+                  })
               })
+            })
           }
         }
       ]
@@ -100,7 +111,7 @@ export class RetraitPage implements OnInit {
   async messageAlert(color: string, message: string) {
     const toast = await this.toastController.create({
       color: color,
-      duration: 2000,
+      duration: 1000,
       message: message,
       position: 'top'
     });

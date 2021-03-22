@@ -9,10 +9,12 @@ const api_url= environment.api_url;
   providedIn: 'root'
 })
 export class AgenceService {
+  id_input='#show_hide_password ion-input';
+  id_icon= '#show_hide_password ion-icon';
 
   constructor(private http: HttpClient) { }
 
- getuserSigned(id:number){
+ getSolde(id:number){
     return this.http.get(api_url +`admin/accounts/${id}`);
  }
 
@@ -20,13 +22,13 @@ export class AgenceService {
     $(document).ready(() => {
       $('#show_hide_password a').on('click', (event:any) =>{
         event.preventDefault();
-        if($('#show_hide_password ion-input').attr("type") == "text") {
-          $('#show_hide_password ion-input').attr('type', 'hidden');
-          $('#show_hide_password ion-icon').attr('name','eye-off');
+        if($(this.id_input).attr("type") == "text") {
+          $(this.id_input).attr('type', 'hidden');
+          $(this.id_icon).attr('name','eye-off');
         }
-        else if($('#show_hide_password ion-input').attr("type") == "hidden"){
-          $('#show_hide_password ion-input').attr('type', 'text');
-          $('#show_hide_password ion-icon').attr('name','eye');
+        else if($(this.id_input).attr("type") == "hidden"){
+          $(this.id_input).attr('type', 'text');
+          $(this.id_icon).attr('name','eye');
 
         }
 

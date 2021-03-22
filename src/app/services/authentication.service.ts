@@ -28,8 +28,13 @@ export class AuthenticationService {
     this.storage.set('decodeToken', JSON.stringify(jwt.decodeToken(token)));
    return  this.authenticationState.next(true);
   }
+
   getTokenOnStorage(key){
    return this.storage.get(key);
+  }
+
+  connectedUser(id:number){
+   return  this.http.get(`http://127.0.0.1:8000/api/admin/users/${id}`);
   }
 
   logOut(){
@@ -43,5 +48,7 @@ export class AuthenticationService {
   isAuthenticated(){
     return this.authenticationState.value;
   }
+
+  user = new BehaviorSubject<any>('')
 
 }
