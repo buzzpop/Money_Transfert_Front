@@ -37,6 +37,34 @@ const routes: Routes = [
     path: 'calculateur',
     loadChildren: () => import('./calculateur/calculateur.module').then( m => m.CalculateurPageModule)
   },
+  {
+    path: 'list-users',
+    loadChildren: () => import('./list-users/list-users.module').then( m => m.ListUsersPageModule)
+  },
+  {
+    path: 'create-user',
+    loadChildren: () => import('./create-user/create-user.module').then( m => m.CreateUserPageModule)
+  },
+  {
+    path: 'create-agence',
+    loadChildren: () => import('./create-agence/create-agence.module').then( m => m.CreateAgencePageModule)
+  },
+  {
+    path: 'list-agence',
+    loadChildren: () => import('./list-agence/list-agence.module').then( m => m.ListAgencePageModule)
+  },
+  {
+    path: 'create-account',
+    loadChildren: () => import('./create-account/create-account.module').then( m => m.CreateAccountPageModule)
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule)
+  },
+  {
+    path: 'faire-depot',
+    loadChildren: () => import('./faire-depot/faire-depot.module').then( m => m.FaireDepotPageModule)
+  },
 
 ];
 

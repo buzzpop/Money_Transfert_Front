@@ -14,7 +14,7 @@
       </ion-col>
     </ion-row>
     <ion-item lines="inset">
-      <ion-grid>
+      <ion-grid *ngIf="role=='ROLE_AdminAgence'">
         <ion-row>
           <small>Mon solde disponible</small>
         </ion-row>
@@ -37,77 +37,77 @@
     <ion-row [routerLink]="['/depot']">
       <ion-item class="content">
         <ion-col class="icon_name">
-        <ion-icon size="large" class="ion-margin-horizontal" name="return-up-forward-outline"></ion-icon>
+        <ion-icon size="default" class="ion-margin-horizontal" name="return-up-forward-outline"></ion-icon>
           <span>Dépôt</span>
         </ion-col>
         <ion-col>
-          <ion-icon size="large" class="ion-float-end" name="caret-forward-circle-outline"></ion-icon>
+          <ion-icon size="default" class="ion-float-end" name="caret-forward-circle-outline"></ion-icon>
         </ion-col>
       </ion-item>
     </ion-row>
     <ion-row  [routerLink]="['/retrait']">
       <ion-item class="content">
         <ion-col class="icon_name">
-          <ion-icon size="large" class="ion-margin-horizontal" name="return-up-back-outline"></ion-icon>
+          <ion-icon size="default" class="ion-margin-horizontal" name="return-up-back-outline"></ion-icon>
           <span>Retrait</span>
         </ion-col>
         <ion-col>
-          <ion-icon size="large" class="ion-float-end" name="caret-forward-circle-outline"></ion-icon>
+          <ion-icon size="default" class="ion-float-end" name="caret-forward-circle-outline"></ion-icon>
         </ion-col>
       </ion-item>
     </ion-row>
     <ion-row  [routerLink]="['/transaction']">
       <ion-item class="content">
         <ion-col class="icon_name">
-          <ion-icon size="large" class="ion-margin-horizontal" name="wallet-outline"></ion-icon>
+          <ion-icon size="default" class="ion-margin-horizontal" name="wallet-outline"></ion-icon>
           <span>Mes transactions</span>
         </ion-col>
         <ion-col>
-          <ion-icon size="large" class="ion-float-end" name="caret-forward-circle-outline"></ion-icon>
+          <ion-icon size="default" class="ion-float-end" name="caret-forward-circle-outline"></ion-icon>
         </ion-col>
       </ion-item>
     </ion-row>
     <ion-row>
       <ion-item class="content">
         <ion-col class="icon_name">
-          <ion-icon size="large" class="ion-margin-horizontal" name="pricetags-outline"></ion-icon>
+          <ion-icon size="default" class="ion-margin-horizontal" name="pricetags-outline"></ion-icon>
           <span>Toutes les transactions</span>
         </ion-col>
         <ion-col>
-          <ion-icon size="large" class="ion-float-end" name="caret-forward-circle-outline"></ion-icon>
+          <ion-icon size="default" class="ion-float-end" name="caret-forward-circle-outline"></ion-icon>
         </ion-col>
       </ion-item>
     </ion-row>
     <ion-row [routerLink]="['/commission']">
       <ion-item class="content">
         <ion-col class="icon_name">
-          <ion-icon size="large" class="ion-margin-horizontal" name="cash-outline"></ion-icon>
+          <ion-icon size="default" class="ion-margin-horizontal" name="cash-outline"></ion-icon>
           <span>Les comissions</span>
         </ion-col>
         <ion-col>
-          <ion-icon size="large" class="ion-float-end" name="caret-forward-circle-outline"></ion-icon>
+          <ion-icon size="default" class="ion-float-end" name="caret-forward-circle-outline"></ion-icon>
         </ion-col>
       </ion-item>
     </ion-row>
     <ion-row [routerLink]="['/calculateur']">
       <ion-item class="content">
         <ion-col class="icon_name">
-          <ion-icon size="large" class="ion-margin-horizontal" name="calculator-outline"></ion-icon>
+          <ion-icon size="default" class="ion-margin-horizontal" name="calculator-outline"></ion-icon>
           <span>Calculateur de frais</span>
         </ion-col>
         <ion-col>
-          <ion-icon size="large" class="ion-float-end" name="caret-forward-circle-outline"></ion-icon>
+          <ion-icon size="default" class="ion-float-end" name="caret-forward-circle-outline"></ion-icon>
         </ion-col>
       </ion-item>
     </ion-row>
    <ion-row (click)="logOut()">
       <ion-item class="content">
         <ion-col class="icon_name">
-          <ion-icon size="large" class="ion-margin-horizontal" name="log-out-outline"></ion-icon>
+          <ion-icon size="default" class="ion-margin-horizontal" name="log-out-outline"></ion-icon>
           <span>Déconnexion</span>
         </ion-col>
         <ion-col>
-          <ion-icon size="large" class="ion-float-end" name="caret-forward-circle-outline"></ion-icon>
+          <ion-icon size="default" class="ion-float-end" name="caret-forward-circle-outline"></ion-icon>
         </ion-col>
       </ion-item>
     </ion-row>

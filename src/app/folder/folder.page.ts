@@ -15,6 +15,7 @@ export class FolderPage implements OnInit {
   account:any
   accountId: number
   user:any
+  role:string
 
   constructor(private authService: AuthenticationService,
               private router: Router, private agenceService: AgenceService,
@@ -22,8 +23,11 @@ export class FolderPage implements OnInit {
 
   ngOnInit() {
     this.authService.getTokenOnStorage('decodeToken').then( (token)=>{
+      this.role=JSON.parse(token).roles.role
+      console.log(this.role);
       this.accountId = JSON.parse(token).id;
-      this.getSolde(this.accountId)
+      if (this.accountId)
+      this.getSolde(this.accountId);
 
       this.authService.connectedUser(JSON.parse(token).idUser).subscribe(response=>{
         if (response){

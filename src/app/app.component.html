@@ -3,32 +3,53 @@
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
         <ion-list id="inbox-list">
-          <ion-list-header *ngIf="user"  class="ion-margin-bottom agence">Agence:{{user.agency.agencyName}} </ion-list-header>
+          <ion-list-header *ngIf="user"  class="ion-margin-bottom agence">Profil:{{user.profil.libelle}} </ion-list-header>
+          <ion-list-header *ngIf="user.agency"  class="ion-margin-bottom agence">Agence:{{user.agency.agencyName}} </ion-list-header>
           <ion-note class="username" *ngIf="user">{{user.username}} </ion-note>
           <ion-grid>
-            <ion-row class="ion-justify-content-center ion-margin-bottom">
-              <ion-badge>{{user.firstname+' '+user.lastname}}</ion-badge>
-            </ion-row>
             <ion-row class="ion-justify-content-center ion-margin-bottom">
               <ion-avatar *ngIf="user" class="ion-margin-start">
                 <img src="{{'data:image/jpg;base64,'+user.avatar}}">
               </ion-avatar>
             </ion-row>
             <ion-row *ngIf="user">
-              <ion-fab horizontal="center">
-                <ion-fab-button (click)="takePicture()">
+              <ion-col> <ion-fab horizontal="center">
+                <ion-fab-button (click)="takePictureFromCamera()">
                   <ion-icon name="camera"></ion-icon>
                 </ion-fab-button>
-              </ion-fab>
+              </ion-fab></ion-col>
+              <ion-col> <ion-fab horizontal="center">
+                <ion-fab-button (click)="takePictureFromGallery()">
+                  <ion-icon name="images-outline"></ion-icon>
+                </ion-fab-button>
+              </ion-fab></ion-col>
             </ion-row>
           </ion-grid>
-
+          <div *ngIf="role=='ROLE_AdminAgence'">
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
+          </div>
+
+          <div *ngIf="role=='ROLE_AdminSystem'">
+          <ion-menu-toggle auto-hide="false" *ngFor="let admin of adminSystem; let i = index">
+            <ion-item routerDirection="root" [routerLink]="[admin.url]" lines="none" detail="false" routerLinkActive="selected">
+              <ion-icon slot="start" [ios]="admin.icon + '-outline'" [md]="admin.icon + '-sharp'"></ion-icon>
+              <ion-label>{{ admin.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          </div>
+          <div *ngIf="role=='ROLE_Caissier' || role=='ROLE_AdminSystem' ">
+            <ion-menu-toggle auto-hide="false"  *ngFor="let c of caissier; let i = index">
+              <ion-item  routerDirection="root" [routerLink]="[c.url]" lines="none" detail="false" routerLinkActive="selected">
+                <ion-icon slot="start" [ios]="c.icon + '-outline'" [md]="c.icon + '-sharp'"></ion-icon>
+                <ion-label>{{ c.title }}</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </div>
           <ion-menu-toggle auto-hide="false">
           <ion-item (click)="logOut()" class="logOut" routerDirection="root" lines="none" detail="false" routerLinkActive="selected">
             <ion-icon slot="start" name="log-out"></ion-icon>

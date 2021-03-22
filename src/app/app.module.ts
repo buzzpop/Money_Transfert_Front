@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import {IonicStorageModule} from '@ionic/storage';
 import {HTTP_INTERCEPTORS,  HttpClientModule} from '@angular/common/http';
 import {InterceptorService} from './services/interceptor.service';
+import { Camera} from '@ionic-native/camera/ngx';
 
 
 @NgModule({
@@ -21,8 +22,9 @@ import {InterceptorService} from './services/interceptor.service';
     IonicStorageModule.forRoot(),
     HttpClientModule,
   ],
-  providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
-    {provide:HTTP_INTERCEPTORS,useClass:InterceptorService,multi:true}],
+  providers: [{provide: RouteReuseStrategy, useClass: IonicRouteStrategy,},
+    {provide:HTTP_INTERCEPTORS,useClass:InterceptorService,multi:true}
+    ,Camera],
   bootstrap: [AppComponent],
   exports: []
 })
