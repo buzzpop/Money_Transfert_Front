@@ -46,7 +46,15 @@ const routes: Routes = [
     loadChildren: () => import('./create-user/create-user.module').then( m => m.CreateUserPageModule)
   },
   {
+    path: 'create-user/:id',
+    loadChildren: () => import('./create-user/create-user.module').then( m => m.CreateUserPageModule)
+  },
+  {
     path: 'create-agence',
+    loadChildren: () => import('./create-agence/create-agence.module').then( m => m.CreateAgencePageModule)
+  },
+  {
+    path: 'create-agence/:id',
     loadChildren: () => import('./create-agence/create-agence.module').then( m => m.CreateAgencePageModule)
   },
   {
@@ -64,6 +72,22 @@ const routes: Routes = [
   {
     path: 'faire-depot',
     loadChildren: () => import('./faire-depot/faire-depot.module').then( m => m.FaireDepotPageModule)
+  },
+  {
+    path: 'welcome',
+    loadChildren: () => import('./welcome/welcome.module').then( m => m.WelcomePageModule)
+  },
+  {
+    path: 'agence/:id/users-agence',
+    loadChildren: () => import('./users-agence/users-agence.module').then( m => m.UsersAgencePageModule)
+  },
+  {
+    path: 'list-depot',
+    loadChildren: () => import('./list-depot/list-depot.module').then( m => m.ListDepotPageModule)
+  },
+  {
+    path: 'depots/:id/user',
+    loadChildren: () => import('./depot-user/depot-user.module').then( m => m.DepotUserPageModule)
   },
 
 ];

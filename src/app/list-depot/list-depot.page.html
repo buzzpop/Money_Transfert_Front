@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-grid>
+    <ion-row class="ion-padding">
+      <ion-col>
+        <a><ion-back-button defaultHref="/home" text="Back"></ion-back-button></a>
+      </ion-col>
+      <ion-col>
+        <img src="assets/Maquettes/Logo%20MONEY%20SA%201.png" alt="">
+      </ion-col>
+      <ion-col class="ion-text-end">
+        <ion-badge>  {{depots.length}}</ion-badge>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-margin-bottom">
+      <ion-col class="icon_name">
+        <span>Liste des Dépot</span>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-header>
+<ion-content class="ion-margin">
+  <ion-grid class="ion-margin table">
+    <div class="ion-text-center">
+      <ion-badge>Les dépot</ion-badge>
+    </div>
+
+    <ion-row class="tableHead">
+      <ion-col>Date</ion-col>
+      <ion-col>Montant</ion-col>
+      <ion-col>User</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let d of depots">
+      <ion-col>{{d.date| date:'M/d/yy'}}</ion-col>
+      <ion-col><ion-avatar>{{d.amount+ ' cfa'}}</ion-avatar></ion-col>
+      <ion-col>{{d.user.firstname}} <br> <ion-icon  [routerLink]="['/depots',d.user.id,'user']" class="trash" name="caret-down-circle"></ion-icon></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

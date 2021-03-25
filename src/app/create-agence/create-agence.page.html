@@ -1,9 +1,67 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>createAgence</ion-title>
-  </ion-toolbar>
+<ion-header [translucent]="true">
+  <ion-grid>
+    <ion-row class="ion-padding">
+      <ion-col>
+        <a [routerLink]="['/home']"><ion-icon class="home" name="home" size="large"></ion-icon></a>
+      </ion-col>
+      <ion-col>
+        <img src="assets/Maquettes/Logo%20MONEY%20SA%201.png" alt="">
+      </ion-col>
+      <ion-col>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-margin-bottom">
+      <ion-col class="ion-text-center">
+        <span>{{agencebyId?'Modifier Agence':'Creer Agence'}}</span>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-header>
-
 <ion-content>
-
+  <ion-card class="card">
+  <form [formGroup]="createAgence" #myform="ngForm" (ngSubmit)="submit()">
+    <ion-item lines="inset">
+      <ion-label position="floating">Agence</ion-label>
+      <ion-input type="text" formControlName="agencyName"></ion-input>
+      <small class="text-danger"
+             *ngIf="createAgence.get('agencyName').hasError('required') && (myform.submitted || createAgence.get('agencyName').touched) ">
+        Le nom est requis.
+      </small>
+    </ion-item>
+    <ion-item lines="inset">
+      <ion-label position="floating">Adresse</ion-label>
+      <ion-input type="text" formControlName="agencyAddress"></ion-input>
+      <small class="text-danger"
+             *ngIf="createAgence.get('agencyAddress').hasError('required') && (myform.submitted || createAgence.get('agencyAddress').touched) ">
+        L'adresse est requis.
+      </small>
+    </ion-item>
+    <div [formGroupName]="'account'">
+      <ion-item lines="inset">
+        <ion-label position="floating">N° Compte</ion-label>
+        <ion-input disabled type="text" color="tertiary" formControlName="accountNumber"></ion-input>
+        <small class="text-danger"
+               *ngIf="createAgence.get('account').get('accountNumber').hasError('required') && (myform.submitted || createAgence.get('account').get('accountNumber').touched) ">
+                Le numero du compte est requis.
+        </small>
+      </ion-item>
+      <ion-item lines="inset" *ngIf="!agencebyId">
+        <ion-label position="floating">Montant</ion-label>
+        <ion-input type="Number" formControlName="balance"></ion-input>
+        <small class="text-danger"
+               *ngIf="createAgence.get('account').get('balance').hasError('required') && (myform.submitted || createAgence.get('account').get('balance').touched) ">
+          Le nom est requis.
+        </small>
+        <small class="text-danger"
+               *ngIf="createAgence.get('account').get('balance').hasError('min') && (myform.submitted || createAgence.get('account').get('balance').touched) ">
+          Le montant minimum requis est 700000 est requis.
+        </small>
+      </ion-item>
+    </div>
+    <section class="ion-text-center">
+      <ion-button type="submit" [disabled]="createAgence.invalid">{{agencebyId?'Modifier Agence':'Creer Agence'}}</ion-button>
+    </section>
+  </form>
+  </ion-card>
 </ion-content>

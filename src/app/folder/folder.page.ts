@@ -16,12 +16,14 @@ export class FolderPage implements OnInit {
   accountId: number
   user:any
   role:string
+  date:any
 
   constructor(private authService: AuthenticationService,
               private router: Router, private agenceService: AgenceService,
               private transactionS: TransactionsService) { }
 
   ngOnInit() {
+    this.date= Date.now()
     this.authService.getTokenOnStorage('decodeToken').then( (token)=>{
       this.role=JSON.parse(token).roles.role
       console.log(this.role);

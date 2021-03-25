@@ -13,8 +13,8 @@
         </ion-avatar>
       </ion-col>
     </ion-row>
-    <ion-item lines="inset">
-      <ion-grid *ngIf="role=='ROLE_AdminAgence'">
+    <ion-item lines="inset" *ngIf="role=='ROLE_AdminAgence'">
+      <ion-grid >
         <ion-row>
           <small>Mon solde disponible</small>
         </ion-row>
@@ -32,9 +32,10 @@
   </ion-grid>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
+<ion-content [fullscreen]="true" >
+<ion-card>
   <ion-grid>
-    <ion-row [routerLink]="['/depot']">
+    <ion-row *ngIf="role=='ROLE_AdminAgence'" [routerLink]="['/depot']">
       <ion-item class="content">
         <ion-col class="icon_name">
         <ion-icon size="default" class="ion-margin-horizontal" name="return-up-forward-outline"></ion-icon>
@@ -45,7 +46,7 @@
         </ion-col>
       </ion-item>
     </ion-row>
-    <ion-row  [routerLink]="['/retrait']">
+    <ion-row *ngIf="role=='ROLE_AdminAgence'"  [routerLink]="['/retrait']">
       <ion-item class="content">
         <ion-col class="icon_name">
           <ion-icon size="default" class="ion-margin-horizontal" name="return-up-back-outline"></ion-icon>
@@ -56,7 +57,7 @@
         </ion-col>
       </ion-item>
     </ion-row>
-    <ion-row  [routerLink]="['/transaction']">
+    <ion-row *ngIf="role=='ROLE_AdminAgence'"  [routerLink]="['/transaction']">
       <ion-item class="content">
         <ion-col class="icon_name">
           <ion-icon size="default" class="ion-margin-horizontal" name="wallet-outline"></ion-icon>
@@ -67,7 +68,7 @@
         </ion-col>
       </ion-item>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="role=='ROLE_AdminAgence'">
       <ion-item class="content">
         <ion-col class="icon_name">
           <ion-icon size="default" class="ion-margin-horizontal" name="pricetags-outline"></ion-icon>
@@ -78,7 +79,7 @@
         </ion-col>
       </ion-item>
     </ion-row>
-    <ion-row [routerLink]="['/commission']">
+    <ion-row *ngIf="role=='ROLE_AdminAgence'" [routerLink]="['/commission']">
       <ion-item class="content">
         <ion-col class="icon_name">
           <ion-icon size="default" class="ion-margin-horizontal" name="cash-outline"></ion-icon>
@@ -89,7 +90,7 @@
         </ion-col>
       </ion-item>
     </ion-row>
-    <ion-row [routerLink]="['/calculateur']">
+    <ion-row *ngIf="role=='ROLE_AdminAgence'" [routerLink]="['/calculateur']">
       <ion-item class="content">
         <ion-col class="icon_name">
           <ion-icon size="default" class="ion-margin-horizontal" name="calculator-outline"></ion-icon>
@@ -100,6 +101,72 @@
         </ion-col>
       </ion-item>
     </ion-row>
+
+
+    <div class="admin ion-margin-top" *ngIf="role=='ROLE_AdminSystem'">
+      <ion-item>
+        <ion-label>{{ date | date: 'dd/MM/yyyy' }}</ion-label>
+        <ion-badge color="success" slot="end">connecté</ion-badge>
+      </ion-item>
+      <ion-row>
+        <ion-col>
+          <ion-chip [routerLink]="['/list-users']">
+            <ion-icon name="people"></ion-icon>
+            <ion-label>liste users</ion-label>
+          </ion-chip>
+        </ion-col>
+        <ion-col>
+          <ion-chip  [routerLink]="['/create-user']">
+            <ion-icon name="person-add"></ion-icon>
+            <ion-label>Ajout user</ion-label>
+          </ion-chip>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-chip [routerLink]="['/create-agence']">
+            <ion-icon name="business"></ion-icon>
+            <ion-label>Creer agence</ion-label>
+          </ion-chip>
+        </ion-col>
+        <ion-col>
+          <ion-chip [routerLink]="['/list-agence']">
+            <ion-icon name="list"></ion-icon>
+            <ion-label>Liste agences</ion-label>
+          </ion-chip>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-chip>
+            <ion-icon name="key"></ion-icon>
+            <ion-label>Creer compte</ion-label>
+          </ion-chip>
+        </ion-col>
+        <ion-col>
+          <ion-chip [routerLink]="['/faire-depot']">
+            <ion-icon name="wallet"></ion-icon>
+            <ion-label>Faire Dépot</ion-label>
+          </ion-chip>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row>
+        <ion-col>
+          <ion-chip>
+            <ion-icon name="close-circle"></ion-icon>
+            <ion-label>Annuler Dépot</ion-label>
+          </ion-chip>
+        </ion-col>
+        <ion-col>
+          <ion-chip [routerLink]="['/list-depot']">
+            <ion-icon name="cash"></ion-icon>
+            <ion-label>Liste des Dépot</ion-label>
+          </ion-chip>
+        </ion-col>
+      </ion-row>
+    </div>
    <ion-row (click)="logOut()">
       <ion-item class="content">
         <ion-col class="icon_name">
@@ -112,6 +179,7 @@
       </ion-item>
     </ion-row>
   </ion-grid>
+</ion-card>
 </ion-content>
 <ion-footer>
   <ion-toolbar>
@@ -133,7 +201,6 @@
           <div> <ion-icon name="calculator-outline" size="large"></ion-icon></div>
           <small>calculator</small>
         </ion-col>
-
       </ion-row>
     </ion-grid>
   </ion-toolbar>

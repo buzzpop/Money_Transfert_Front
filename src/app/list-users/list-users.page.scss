@@ -1,0 +1,56 @@
+ion-grid.table {
+  padding: 10px;
+  box-shadow: 0 0 10px;
+  --ion-grid-column-padding: 10px;
+  border-collapse: collapse;
+  border-style: hidden;
+
+  ion-row:first-child {
+    background-color: #3dc2ff;
+    font-weight: bold;
+  }
+  ion-col {
+    text-align: center;
+    font-size: 10px;
+    border: 1px solid black;
+    border-bottom: 0;
+    border-right: 0;
+  }
+  ion-col:last-child {
+    border-right: 1px solid black;
+  }
+
+  ion-row:last-child {
+    border-bottom: 1px solid black;
+  }
+}
+div{
+  margin-bottom: 30px;
+}
+.title{
+  margin-top: 20px;
+  justify-content: center;
+  margin-left: 70px;
+}
+.tableHead{
+  font-weight: bold;
+}
+ion-header{
+  background-color: #d0d0d0;
+  .icon_name{
+    text-align: center;
+  }
+}
+
+.pencil{
+  margin-right: 10px;
+  color: #3a7be0;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.trash{
+  color: #3a7be0;
+  font-size: 15px;
+  cursor: pointer;
+}

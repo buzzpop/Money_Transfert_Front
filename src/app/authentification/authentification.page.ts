@@ -46,7 +46,8 @@ export class AuthentificationPage implements OnInit {
     this.authService.authenticationState.subscribe(
       state=>{
        if (state){
-         this.router.navigate(['/home'])
+
+         this.router.navigate(['/welcome'])
        }else {
          this.router.navigate(['/authentication'])
        }

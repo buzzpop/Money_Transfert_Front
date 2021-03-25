@@ -1,9 +1,45 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>listAgence</ion-title>
-  </ion-toolbar>
+<ion-header [translucent]="true">
+  <ion-grid>
+    <ion-row class="ion-padding">
+      <ion-col>
+        <a [routerLink]="['/home']"><ion-icon class="home" name="home" size="large"></ion-icon></a>
+      </ion-col>
+      <ion-col>
+        <img src="assets/Maquettes/Logo%20MONEY%20SA%201.png" alt="">
+      </ion-col>
+      <ion-col class="ion-text-end">
+        <ion-badge>  {{agencies.length}}</ion-badge>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-margin-bottom">
+      <ion-col class="icon_name">
+        <span>Liste des Agences</span>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-header>
+<ion-content class="ion-margin">
+  <ion-grid class="ion-margin table">
+    <div>
+      <ion-fab [routerLink]="['/create-agence']">
+        <ion-fab-button>
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+      <ion-badge class="title">La listes des Agences</ion-badge>
+    </div>
 
-<ion-content>
-
+    <ion-row class="tableHead">
+      <ion-col>Nom</ion-col>
+      <ion-col>N° Compte</ion-col>
+      <ion-col>A</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let a of agencies">
+      <ion-col>{{ a.agencyName}}</ion-col>
+      <ion-col>{{a.account.accountNumber}}</ion-col>
+      <ion-col><ion-icon [routerLink]="['/create-agence',a.id]"
+      class="pencil" name="pencil"></ion-icon> <ion-icon [routerLink]="['/agence',a.id,'users-agence']" class="trash" name="people"></ion-icon></ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

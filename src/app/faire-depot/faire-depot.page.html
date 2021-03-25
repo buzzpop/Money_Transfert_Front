@@ -1,9 +1,61 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>faireDepot</ion-title>
-  </ion-toolbar>
+<ion-header [translucent]="true">
+  <ion-grid>
+    <ion-row class="ion-padding">
+      <ion-col>
+        <a [routerLink]="['/home']"><ion-icon class="home" name="home" size="large"></ion-icon></a>
+      </ion-col>
+      <ion-col>
+        <img src="assets/Maquettes/Logo%20MONEY%20SA%201.png" alt="">
+      </ion-col>
+      <ion-col>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-margin-bottom">
+      <ion-col class="ion-text-center">
+        <span>Faire un Dépot</span>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-header>
 
-<ion-content>
-
+<ion-content padding>
+  <form [formGroup]="depot" #myform="ngForm" (ngSubmit)="onFormSubmit(depot.value)">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">Deposer</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="floating">Montant</ion-label>
+          <ion-input type="number" formControlName="amount"></ion-input>
+          <small class="text-danger"
+                 *ngIf="depot.get('amount').hasError('required') && (myform.submitted || depot.get('amount').touched) ">
+            Le montant est requis.
+          </small>
+          <small class="text-danger"
+                 *ngIf="depot.get('amount').hasError('min') && (myform.submitted || depot.get('amount').touched) ">
+            Déposer minimum 10000 Franc CFA.
+          </small>
+          <small class="text-danger"
+                 *ngIf="depot.get('amount').hasError('pattern') && (myform.submitted || depot.get('amount').touched) ">
+            Entrer un montant positif superieur a 10000.
+          </small>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Agence</ion-label>
+          <ion-select interface="popover" formControlName="idA">
+            <ion-select-option *ngFor="let agency of agencies" value="{{agency.id}}">{{agency.agencyName}}</ion-select-option>
+          </ion-select>
+          <small class="text-danger"
+                 *ngIf="depot.get('idA').hasError('required') && (myform.submitted || depot.get('idA').touched) ">
+            Séléctionner l'agence ou déposer l'argent.
+          </small>
+        </ion-item>
+        <section class="ion-text-center depot">
+          <ion-button type="submit" [disabled]="depot.invalid">Faire Dépot</ion-button>
+        </section>
+      </ion-card-content>
+    </ion-card>
+  </form>
 </ion-content>

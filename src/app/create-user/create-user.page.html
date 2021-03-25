@@ -1,9 +1,106 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>createUser</ion-title>
-  </ion-toolbar>
+<ion-header [translucent]="true">
+  <ion-grid>
+    <ion-row class="ion-padding">
+      <ion-col>
+        <a [routerLink]="['/home']"><ion-icon class="home" name="home" size="large"></ion-icon></a>
+      </ion-col>
+      <ion-col>
+        <img src="assets/Maquettes/Logo%20MONEY%20SA%201.png" alt="">
+      </ion-col>
+      <ion-col>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-margin-bottom">
+      <ion-col class="ion-text-center">
+        <span>{{user?'Modifier Utilisateurs':'Creer Utilisateurs'}}</span>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-header>
-
 <ion-content>
+  <ion-card>
+  <form [formGroup]="createUserForm" #myform="ngForm" (ngSubmit)="submit()">
+    <ion-item lines="inset">
+      <ion-label position="floating">Username</ion-label>
+      <ion-input type="text" formControlName="username"></ion-input>
+      <small class="text-danger"
+             *ngIf="createUserForm.get('username').hasError('required') && (myform.submitted || createUserForm.get('username').touched) ">
+        Le username est requis.
+      </small>
+    </ion-item>
+    <ion-item lines="inset" *ngIf="!user">
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="text" formControlName="password"></ion-input>
+      <small class="text-danger"
+             *ngIf="createUserForm.get('password').hasError('required') && (myform.submitted || createUserForm.get('password').touched) ">
+        Le mot de passe est requis.
+      </small>
+    </ion-item>
+    <ion-item lines="inset">
+      <ion-label position="floating">Firstname</ion-label>
+      <ion-input type="text"  formControlName="firstname"></ion-input>
+      <small class="text-danger"
+             *ngIf="createUserForm.get('firstname').hasError('required') && (myform.submitted || createUserForm.get('firstname').touched) ">
+        Le prénom est requis.
+      </small>
+    </ion-item>
+    <ion-item lines="inset">
+      <ion-label position="floating">Lastname</ion-label>
+      <ion-input type="text"  formControlName="lastname"></ion-input>
+      <small class="text-danger"
+             *ngIf="createUserForm.get('lastname').hasError('required') && (myform.submitted || createUserForm.get('lastname').touched) ">
+        Le nom est requis.
+      </small>
+    </ion-item>
+    <ion-item>
+    <ion-label position="floating">Profil</ion-label>
+      <ion-select #ionSelect  (ionChange)="selectedProfil(ionSelect)"  formControlName="profil">
+        <ion-select-option  *ngFor="let p of profil" value="{{p.id}}">{{p.libelle}}</ion-select-option>
+      </ion-select>
+      <small class="text-danger"
+             *ngIf="createUserForm.get('profil').hasError('required') && (myform.submitted || createUserForm.get('profil').touched) ">
+        Le profil est requis.
+      </small>
+    </ion-item>
 
+    <ion-item lines="inset" *ngIf="agency.length">
+      <ion-label position="floating">Agence</ion-label>
+      <ion-select interface="popover" formControlName="agence">
+        <ion-select-option   *ngFor="let a of agency"  value="{{a.id}}">{{a.agencyName}}</ion-select-option>
+      </ion-select>
+      <small class="text-danger"
+             *ngIf="createUserForm.get('profil').hasError('required') && (myform.submitted || createUserForm.get('profil').touched) ">
+        l'agence est requis.
+      </small>
+    </ion-item>
+    <ion-item lines="inset">
+      <ion-label position="floating">Phone</ion-label>
+      <ion-input type="text"  formControlName="phone"></ion-input>
+      <small class="text-danger"
+             *ngIf="createUserForm.get('phone').hasError('required') && (myform.submitted || createUserForm.get('phone').touched) ">
+        Le phone est requis.
+      </small>
+    </ion-item>
+    <ion-item lines="inset">
+      <ion-label position="floating">N° CNI</ion-label>
+      <ion-input type="text" formControlName="cni"></ion-input>
+      <small class="text-danger"
+             *ngIf="createUserForm.get('cni').hasError('required') && (myform.submitted || createUserForm.get('cni').touched) ">
+        Le cni est requis.
+      </small>
+    </ion-item>
+    <ion-item lines="inset">
+      <ion-label position="floating">Address</ion-label>
+      <ion-input type="text" formControlName="address"></ion-input>
+      <small class="text-danger"
+             *ngIf="createUserForm.get('address').hasError('required') && (myform.submitted || createUserForm.get('address').touched) ">
+        L'adresse est requis.
+      </small>
+    </ion-item>
+    <section class="ion-text-center">
+      <ion-button type="submit" [disabled]="createUserForm.invalid">{{user?'Modifier User':'Creer User'}}</ion-button>
+    </section>
+  </form>
+  </ion-card>
 </ion-content>
