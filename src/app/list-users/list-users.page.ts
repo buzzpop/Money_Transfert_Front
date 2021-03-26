@@ -10,20 +10,22 @@ import {AlertController} from '@ionic/angular';
 })
 export class ListUsersPage implements OnInit {
   users =[]
+  p=1;
 
   constructor(private userService: UserService,private functionS: FunctionsService,
               private alertCtrl: AlertController) { }
 
   ngOnInit() {
     this.userService.__refreshSolde.subscribe(()=>{
+
       this.listUsers();
     })
     this.listUsers();
   }
 
   listUsers(){
-    this.users=[];
     this.userService.getUsers().subscribe(users=>{
+
       for (let u of users['hydra:member']){
         this.users.push(u)
       }

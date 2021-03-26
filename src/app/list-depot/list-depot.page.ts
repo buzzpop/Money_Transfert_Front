@@ -8,6 +8,7 @@ import {AccountService} from '../services/account.service';
 })
 export class ListDepotPage implements OnInit {
   depots=[];
+  p=1;
 
   constructor(private accountS: AccountService) { }
 
@@ -20,6 +21,7 @@ export class ListDepotPage implements OnInit {
   getDepot(){
     this.depots=[]
     this.accountS.getdeposit().subscribe(response=>{
+      console.log(response);
       for (let d of response['hydra:member']){
         this.depots.push(d)
       }

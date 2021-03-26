@@ -7,7 +7,8 @@
       <ion-col>
         <img src="assets/Maquettes/Logo%20MONEY%20SA%201.png" alt="">
       </ion-col>
-      <ion-col>
+      <ion-col class="ion-text-end">
+        <ion-badge color="primary">{{usersAgency.length}}</ion-badge>
       </ion-col>
     </ion-row>
     <ion-row class="ion-margin-bottom">
@@ -24,7 +25,6 @@
 <ion-content class="ion-margin">
   <ion-grid class="ion-margin table" *ngIf="usersAgency.length">
     <div>
-      <ion-badge color="primary">{{usersAgency.length}}</ion-badge>
       <ion-badge class="title">Les Users de l'Agence</ion-badge>
     </div>
 
@@ -33,11 +33,14 @@
       <ion-col>avatar</ion-col>
       <ion-col>A</ion-col>
     </ion-row>
-    <ion-row *ngFor="let u of usersAgency">
+    <ion-row *ngFor="let u of usersAgency  | paginate: { itemsPerPage: 4, currentPage: p }">
       <ion-col>{{ u.firstname}}</ion-col>
       <ion-col><ion-avatar><img src="{{'data:image/jpg;base64,'+u.avatar}}" alt=""></ion-avatar></ion-col>
       <ion-col><ion-icon (click)="delete(u.id)"  class="trash" name="close-circle"></ion-icon></ion-col>
     </ion-row>
+    <div class="ion-float-right"> <pagination-controls (pageChange)="p = $event"maxSize="0"></pagination-controls></div>
+
   </ion-grid>
+
   <small *ngIf="!usersAgency.length" id="danger" #empty>Pas encore de users dans l'Agence</small>
 </ion-content>

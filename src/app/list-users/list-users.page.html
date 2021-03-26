@@ -35,10 +35,11 @@
       <ion-col>Phone</ion-col>
       <ion-col>A</ion-col>
     </ion-row>
-    <ion-row *ngFor="let u of users">
+    <ion-row *ngFor="let u of users | paginate: { itemsPerPage: 7, currentPage: p }">
       <ion-col>{{ u.lastname}}</ion-col>
       <ion-col>{{u.phone}}</ion-col>
       <ion-col><ion-icon [routerLink]="['/create-user',u.id]" class="pencil" name="pencil"></ion-icon> <ion-icon (click)="delete(u.id)" class="trash" name="close-circle"></ion-icon></ion-col>
     </ion-row>
   </ion-grid>
+ <div class="ion-float-right"> <pagination-controls (pageChange)="p = $event"maxSize="0"></pagination-controls></div>
 </ion-content>

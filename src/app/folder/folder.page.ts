@@ -4,6 +4,8 @@ import {AuthenticationService} from '../services/authentication.service';
 import {AgenceService} from '../services/agence.service';
 import {TransactionsService} from '../services/transactions.service';
 import {BehaviorSubject} from 'rxjs';
+import {AccountService} from '../services/account.service';
+import {FunctionsService} from '../services/functions.service';
 
 @Component({
   selector: 'app-folder',
@@ -20,7 +22,9 @@ export class FolderPage implements OnInit {
 
   constructor(private authService: AuthenticationService,
               private router: Router, private agenceService: AgenceService,
-              private transactionS: TransactionsService) { }
+              private transactionS: TransactionsService,
+              private accountS: AccountService,
+              private functionS: FunctionsService) { }
 
   ngOnInit() {
     this.date= Date.now()
@@ -59,5 +63,22 @@ export class FolderPage implements OnInit {
   logOut() {
     this.authService.logOut()
     this.router.navigate(['/authentication'])
+  }
+
+  cancelLastDepot() {
+    this.functionS.handleButtonClick().then(res=>{
+      res.onDidDismiss().then(()=>{
+        this.accountS.getLastDeposit().subscribe((response:any)=>{
+          if (response.cancelled==false){
+            this.accountS.confirmPopup(response.id,'Annulation',
+              `Voulez vous annulez le dernier dépot faite? <br>
+              Montant: ${response.amount} Franc CFA <br>`)
+          }else{
+            this.accountS.finalPopup('Annulé','Le dernier dépot a été déja annulé')
+          }
+        })
+      })
+    })
+
   }
 }

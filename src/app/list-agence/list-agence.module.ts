@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { ListAgencePageRoutingModule } from './list-agence-routing.module';
 
 import { ListAgencePage } from './list-agence.page';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    ListAgencePageRoutingModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        ListAgencePageRoutingModule,
+        NgxPaginationModule
+    ],
   declarations: [ListAgencePage]
 })
 export class ListAgencePageModule {}

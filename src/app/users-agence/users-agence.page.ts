@@ -14,6 +14,7 @@ export class UsersAgencePage implements OnInit {
   id:number;
   agencyName:string
   idAccount
+  p=1;
 
   constructor(private agenceS: AgenceService,
               private route:ActivatedRoute,

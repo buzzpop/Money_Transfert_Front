@@ -89,6 +89,10 @@ const routes: Routes = [
     path: 'depots/:id/user',
     loadChildren: () => import('./depot-user/depot-user.module').then( m => m.DepotUserPageModule)
   },
+  {
+    path: 'list-compte',
+    loadChildren: () => import('./list-compte/list-compte.module').then( m => m.ListComptePageModule)
+  },
 
 ];
 

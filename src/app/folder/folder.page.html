@@ -138,9 +138,9 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-chip>
+          <ion-chip  [routerLink]="['/list-compte']">
             <ion-icon name="key"></ion-icon>
-            <ion-label>Creer compte</ion-label>
+            <ion-label>Liste compte</ion-label>
           </ion-chip>
         </ion-col>
         <ion-col>
@@ -154,7 +154,7 @@
 
       <ion-row>
         <ion-col>
-          <ion-chip>
+          <ion-chip (click)="cancelLastDepot()">
             <ion-icon name="close-circle"></ion-icon>
             <ion-label>Annuler Dépot</ion-label>
           </ion-chip>
@@ -163,6 +163,20 @@
           <ion-chip [routerLink]="['/list-depot']">
             <ion-icon name="cash"></ion-icon>
             <ion-label>Liste des Dépot</ion-label>
+          </ion-chip>
+        </ion-col>
+      </ion-row>
+    </div>
+    <div class="admin ion-margin-top" *ngIf="role=='ROLE_Caissier'">
+      <ion-item>
+        <ion-label>{{ date | date: 'dd/MM/yyyy' }}</ion-label>
+        <ion-badge color="success" slot="end">connecté</ion-badge>
+      </ion-item>
+      <ion-row>
+        <ion-col>
+          <ion-chip [routerLink]="['/faire-depot']">
+            <ion-icon name="people"></ion-icon>
+            <ion-label>Faire Dépot</ion-label>
           </ion-chip>
         </ion-col>
       </ion-row>

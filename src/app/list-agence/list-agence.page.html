@@ -35,11 +35,13 @@
       <ion-col>N° Compte</ion-col>
       <ion-col>A</ion-col>
     </ion-row>
-    <ion-row *ngFor="let a of agencies">
+    <ion-row *ngFor="let a of agencies | paginate: { itemsPerPage: 7, currentPage: p }">
       <ion-col>{{ a.agencyName}}</ion-col>
       <ion-col>{{a.account.accountNumber}}</ion-col>
       <ion-col><ion-icon [routerLink]="['/create-agence',a.id]"
       class="pencil" name="pencil"></ion-icon> <ion-icon [routerLink]="['/agence',a.id,'users-agence']" class="trash" name="people"></ion-icon></ion-col>
     </ion-row>
   </ion-grid>
+  <div class="ion-float-right"> <pagination-controls (pageChange)="p = $event"maxSize="0"></pagination-controls></div>
+
 </ion-content>

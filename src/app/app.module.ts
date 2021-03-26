@@ -12,6 +12,8 @@ import {InterceptorService} from './services/interceptor.service';
 import { Camera} from '@ionic-native/camera/ngx';
 
 
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

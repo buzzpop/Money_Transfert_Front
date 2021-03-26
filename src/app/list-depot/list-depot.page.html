@@ -30,10 +30,12 @@
       <ion-col>Montant</ion-col>
       <ion-col>User</ion-col>
     </ion-row>
-    <ion-row *ngFor="let d of depots">
+    <ion-row *ngFor="let d of depots  | paginate: { itemsPerPage: 4, currentPage: p }">
       <ion-col>{{d.date| date:'M/d/yy'}}</ion-col>
       <ion-col><ion-avatar>{{d.amount+ ' cfa'}}</ion-avatar></ion-col>
       <ion-col>{{d.user.firstname}} <br> <ion-icon  [routerLink]="['/depots',d.user.id,'user']" class="trash" name="caret-down-circle"></ion-icon></ion-col>
     </ion-row>
   </ion-grid>
+  <div class="ion-float-right"> <pagination-controls (pageChange)="p = $event"maxSize="0"></pagination-controls></div>
+
 </ion-content>

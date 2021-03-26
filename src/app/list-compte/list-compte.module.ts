@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { UsersAgencePageRoutingModule } from './users-agence-routing.module';
+import { ListComptePageRoutingModule } from './list-compte-routing.module';
 
-import { UsersAgencePage } from './users-agence.page';
+import { ListComptePage } from './list-compte.page';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
@@ -14,9 +14,9 @@ import {NgxPaginationModule} from 'ngx-pagination';
         CommonModule,
         FormsModule,
         IonicModule,
-        UsersAgencePageRoutingModule,
+        ListComptePageRoutingModule,
         NgxPaginationModule
     ],
-  declarations: [UsersAgencePage]
+  declarations: [ListComptePage]
 })
-export class UsersAgencePageModule {}
+export class ListComptePageModule {}

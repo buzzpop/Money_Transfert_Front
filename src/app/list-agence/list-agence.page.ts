@@ -12,6 +12,7 @@ import {FunctionsService} from '../services/functions.service';
 })
 export class ListAgencePage implements OnInit {
   agencies=[];
+  p=1;
 
   constructor(private agenceS:AgenceService,private alertCtrl:AlertController,
               private functionS: FunctionsService) { }

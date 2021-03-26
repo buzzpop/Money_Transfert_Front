@@ -12,6 +12,7 @@ export class DepotUserPage implements OnInit {
   depotsUser=[];
   id:number
   user:string
+  p=1;
 
   constructor(private accountS: AccountService, private router: ActivatedRoute) { }
 

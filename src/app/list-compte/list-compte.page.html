@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-grid>
+    <ion-row class="ion-padding">
+      <ion-col>
+        <a [routerLink]="['/home']"><ion-icon class="home" name="home" size="large"></ion-icon></a>
+      </ion-col>
+      <ion-col>
+        <img src="assets/Maquettes/Logo%20MONEY%20SA%201.png" alt="">
+      </ion-col>
+      <ion-col class="ion-text-end">
+        <ion-badge>  {{listCompte.length}}</ion-badge>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-margin-bottom">
+      <ion-col class="icon_name">
+        <span>Liste des Utilisateurs</span>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-header>
+
+<ion-content class="ion-padding">
+    <ion-grid class="ion-margin table">
+      <div class="ion-text-center">
+        <ion-badge>Liste des Comptes</ion-badge>
+      </div>
+
+      <ion-row class="tableHead">
+        <ion-col>N° Compte</ion-col>
+        <ion-col>Montant</ion-col>
+      </ion-row>
+      <ion-row *ngFor="let l of listCompte  | paginate: { itemsPerPage: 8, currentPage: p }">
+        <ion-col>{{l.accountNumber}}</ion-col>
+        <ion-col>{{l.balance+' CFA'}}</ion-col>
+      </ion-row>
+    </ion-grid>
+    <div class="ion-float-right"> <pagination-controls (pageChange)="p = $event"maxSize="0"></pagination-controls></div>
+</ion-content>
+
